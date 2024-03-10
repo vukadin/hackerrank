@@ -188,6 +188,7 @@ final class Helpers {
 
 		// account for proxied IP too.
 		$current_ip      = isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
+		$current_ip_hash = self::hash_ip( $current_ip );
 		$current_user_id = get_current_user_id();
 
 		$votes = self::get_votes_for_post( $post_id );
@@ -195,7 +196,7 @@ final class Helpers {
 		foreach ( $votes as $vote ) :
 
 			// check if vote matches either user's ID or IP.
-			if ( ( $current_user_id && (int) $vote['user'] === $current_user_id ) || $vote['ip'] === $current_ip ) :
+			if ( ( $current_user_id && (int) $vote['user'] === $current_user_id ) || $vote['ip_hash'] === $current_ip_hash ) :
 				return $vote['type'];
 			endif;
 
@@ -224,6 +225,7 @@ final class Helpers {
 	public static function add_vote( $post_id, $type ) {
 
 		$current_ip      = isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
+		$current_ip_hash = self::hash_ip( $current_ip );
 		$current_user_id = get_current_user_id();
 
 		$votes = self::get_votes_for_post( $post_id );
@@ -231,7 +233,7 @@ final class Helpers {
 		foreach ( $votes as $vote ) :
 
 			// check if vote matches either user's ID or IP.
-			if ( ( $current_user_id && (int) $vote['user'] === $current_user_id ) || $vote['ip'] === $current_ip ) :
+			if ( ( $current_user_id && (int) $vote['user'] === $current_user_id ) || $vote['ip_hash'] === $current_ip_hash ) :
 				return false;
 			endif;
 
@@ -239,7 +241,7 @@ final class Helpers {
 
 		$votes[] = array(
 			'user'      => $current_user_id,
-			'ip'        => $current_ip,
+			'ip_hash'   => $current_ip_hash,
 			'timestamp' => time(),
 			'type'      => $type,
 		);
@@ -289,5 +291,15 @@ final class Helpers {
 	 */
 	public static function get_vote_action( $post_id ) {
 		return 'hacker-rank-voter-vote-' . $post_id;
+	}
+
+	/**
+	 * Hashes IP address with a salt defined in the plugin.
+	 *
+	 * @param  string $ip IP address.
+	 * @return string Hashed IP address.
+	 */
+	public static function hash_ip( $ip ) {
+		return md5( $ip . HACKER_RANK_VOTER_HASH_SALT );
 	}
 }
