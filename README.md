@@ -164,7 +164,7 @@ The default username is `root`, and the password is the same as supplied in the 
 
 ## Installation
 
-Copy plugin into `wp-content/plugins` folder and activate it.
+Copy `/wp-app/wp-content/plugins/hackerrank-voter` plugin into `wp-content/plugins` folder and activate it.
 
 ## Settings
 
