@@ -159,3 +159,35 @@ wp plugin lists
 You can also visit `http://127.0.0.1:8080` to access phpMyAdmin after starting the containers.
 
 The default username is `root`, and the password is the same as supplied in the `.env` file.
+
+# Hacker Rank Voter Plugin
+
+## Installation
+
+Copy plugin into `wp-content/plugins` folder and activate it.
+
+## Settings
+
+After activation plugin will redirect to the settings page. 
+
+Following settings are available:
+
+### Question Text
+Text that shows before user answers a question.
+
+### Success Text
+Text that shows after user had answered a question.
+
+### Embed Type
+Defaults to `auto` that uses `the_content` filter to append front UI to post content. If set to `manual`, user can place a snippet in his template to display it on the different position.
+```
+do_action( "hacker_rank_voter" );
+```
+
+### Enabled on Post Type
+Post types that will display the frontend UI.
+
+## Usage
+On selected post types, a form with **YES** and **NO** buttons will appear. User can click them only once. Script will check **IP address** and **user's ID** and won't allow duplicate entries.
+
+Votes can also be seen in the backend, as each enabled post type will display **Votes** metabox in the sidebar on **Edit** screen.

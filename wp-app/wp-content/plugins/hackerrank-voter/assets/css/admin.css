@@ -1,0 +1,69 @@
+@font-face {
+	font-family: 'icomoon';
+	src: url('../fonts/icomoon.eot?x1464y');
+	src: url('../fonts/icomoon.eot?x1464y#iefix') format('embedded-opentype'),
+		url('../fonts/icomoon.ttf?x1464y') format('truetype'),
+		url('../fonts/icomoon.woff?x1464y') format('woff'),
+		url('../fonts/icomoon.svg?x1464y#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+}
+
+#hacker-rank-settings-form ul {
+	margin: 0;
+}
+
+#hacker-rank-settings-form .description {
+	margin: 5px 0 10px;
+}
+
+#hacker-rank-settings-form li:not(.active) .description {
+	display: none;
+}
+
+.hrv-votes,
+.hrv-votes *,
+.hrv-votes *:before,
+.hrv-votes *:after {
+	box-sizing: border-box;
+}
+
+.hrv-votes {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	gap: 12px;
+}
+
+.hrv-vote {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 16px;
+	line-height: 16px;
+	color: #000;
+}
+
+.hrv-vote::before {
+	font-family: 'icomoon' !important;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	color: inherit;
+	font-size: 24px;
+}
+
+.hrv-vote-yes:before {
+	content: '\e900';
+	color: #155724;
+}
+.hrv-vote-no:before {
+	content: '\e901';
+	color: #ff0000;
+}
